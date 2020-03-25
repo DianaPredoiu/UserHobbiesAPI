@@ -58,7 +58,8 @@ namespace WebApi.Controllers
         {
             // map dto to entity
             var user_hobby = _mapper.Map<User_Hobby>(user_hobbyDto);
-
+            if (user_hobbyDto == null)
+                return BadRequest();
             try
             {
                 // save 

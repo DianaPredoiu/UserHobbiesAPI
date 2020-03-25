@@ -75,6 +75,8 @@ namespace WebApi.Services
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.IsActive = true;
+            user.IsAdmin = false;
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -101,6 +103,8 @@ namespace WebApi.Services
             user.FirstName = userParam.FirstName;
             user.LastName = userParam.LastName;
             user.Username = userParam.Username;
+            user.IsActive = userParam.IsActive;
+            user.IsAdmin = userParam.IsAdmin;
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))

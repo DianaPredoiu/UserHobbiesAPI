@@ -45,6 +45,8 @@ namespace WebApi.Controllers
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
+            if(!user.IsActive)
+                return BadRequest(new { message = "User is inactive" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -66,6 +68,8 @@ namespace WebApi.Controllers
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                IsActive=user.IsActive,
+                IsAdmin=user.IsAdmin,
                 Token = tokenString
             });
         }
@@ -91,6 +95,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         //GETALL USERS
         [HttpGet]
         public IActionResult GetAll()
@@ -137,7 +142,6 @@ namespace WebApi.Controllers
             _userService.Delete(id);
             return Ok();
         }
-
         
     }//CLASS UsersController
 
