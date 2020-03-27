@@ -6,24 +6,36 @@ namespace WebApi.Entities
     [Table("Users")]
     public class User
     {
-
-        //ATTRIBUTES
         [Key]
         [Column(Order = 0)]
+        [Required]
         public int IdUser { get; set; }
+
+        [Required]
+        [ForeignKey("Roles")]
+        [Column(Order = 3)]
+        public int IdRole { get; set; }
+
+        [Required]
+        [ForeignKey("Teams")]
+        [Column(Order = 2)]
+        public int IdTeam {get;set;}
 
         [Required]
         [StringLength(25)]
         public string Username { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
+        [Required]
         public byte[] PasswordHash { get; set; }
+
+        [Required]
         public byte[] PasswordSalt { get; set; }
 
-        public bool IsAdmin { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Email { get; set; }
 
+        [Required]
         public bool IsActive { get; set; }
 
     }//CLASS User
