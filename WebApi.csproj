@@ -3,14 +3,15 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
-    <Compile Remove="Services\**" />
-    <Content Remove="Controllers\**" />
-    <Content Remove="Services\**" />
-    <EmbeddedResource Remove="Controllers\**" />
-    <EmbeddedResource Remove="Services\**" />
-    <None Remove="Controllers\**" />
-    <None Remove="Services\**" />
+    <Compile Remove="Controllers\HobbyController.cs" />
+    <Compile Remove="Controllers\UserHobbiesViewController.cs" />
+    <Compile Remove="Controllers\User_HobbyController.cs" />
+    <Compile Remove="Dtos\HobbyDto.cs" />
+    <Compile Remove="Dtos\User_HobbyDto.cs" />
+    <Compile Remove="ProjectManagerService.cs" />
+    <Compile Remove="Services\HobbyService.cs" />
+    <Compile Remove="Services\QueryService.cs" />
+    <Compile Remove="Services\User_HobbyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />

@@ -64,12 +64,12 @@ namespace WebApi.Controllers
 
             // return basic user info (without password) and token to store client side
             return Ok(new {
-                Id = user.IdUser,
+                IdUser = user.IdUser,
                 Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
+                Email = user.Email,
+                IdTeam = user.IdTeam,
+                IdRole=user.IdRole,
                 IsActive=user.IsActive,
-                IsAdmin=user.IsAdmin,
                 Token = tokenString
             });
         }
@@ -105,6 +105,7 @@ namespace WebApi.Controllers
             return Ok(userDtos);
         }
 
+        [AllowAnonymous]
         //GET USER BY ID
         [HttpGet("{id}")]//ROUTE
         public IActionResult GetById(int id)
@@ -114,6 +115,7 @@ namespace WebApi.Controllers
             return Ok(userDto);
         }
 
+        [AllowAnonymous]
         //UPDATE USER
         [HttpPut("{id}")]//ROUTE
         public IActionResult Update(int id, [FromBody]UserDto userDto)
@@ -135,12 +137,24 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         //DELETE USER
         [HttpDelete("{id}")]//ROUTE
         public IActionResult Delete(int id)
         {
             _userService.Delete(id);
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("verifyPassword")]
+        public IActionResult VerifyPassord([FromBody]UserDto userDto)
+        {
+            Console.WriteLine(userDto);
+            if (_userService.VerifyPassword(userDto.Password, userDto.IdUser))
+                return Ok();
+            else
+                return BadRequest(new { message = "Password is incorrect" });
         }
         
     }//CLASS UsersController

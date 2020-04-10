@@ -14,6 +14,7 @@ namespace WebApi.Services
         User Create(User user, string password);
         void Update(User user, string password = null);
         void Delete(int id);
+        bool VerifyPassword(string password, int id);
 
     }//INTERFACE IUserService
 
@@ -60,6 +61,23 @@ namespace WebApi.Services
             return _context.Users.Find(id);
         }
 
+        //VERFIY PASSWORD
+        public bool VerifyPassword(string password,int id)
+        {
+            var user = _context.Users.SingleOrDefault(x => x.IdUser == id);
+
+            // check if user exists
+            if (user == null)
+                return false;
+
+            // check if password is correct
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            { Console.WriteLine("pass is bad");  return false; }
+
+                // validation successful
+
+                return true;
+        }
         //ADD USER
         public User Create(User user, string password)
         {
@@ -75,8 +93,7 @@ namespace WebApi.Services
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.IsActive = true;
-            user.IsAdmin = false;
+            user.IsActive = true;   
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -100,11 +117,11 @@ namespace WebApi.Services
             }
 
             // update user properties
-            user.FirstName = userParam.FirstName;
-            user.LastName = userParam.LastName;
+            user.Email = userParam.Email;
+            user.IdRole = userParam.IdRole;
             user.Username = userParam.Username;
             user.IsActive = userParam.IsActive;
-            user.IsAdmin = userParam.IsAdmin;
+            user.IdTeam = userParam.IdTeam;
 
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
