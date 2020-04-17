@@ -24,6 +24,8 @@ namespace WebApi.Dtos
         
         public bool IsActive { get; set; }
 
+        public bool IsAdmin { get; set; }
+
     }//CLASS UserDto
 
 }//NAMESPACE WebApi.Dtos

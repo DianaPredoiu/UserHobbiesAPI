@@ -38,6 +38,9 @@ namespace WebApi.Entities
         [Required]
         public bool IsActive { get; set; }
 
+        [Required]
+        public bool IsAdmin { get; set; }
+
     }//CLASS User
 
 }//NAMESPACE WebApi.Entities

@@ -70,6 +70,7 @@ namespace WebApi.Controllers
                 IdTeam = user.IdTeam,
                 IdRole=user.IdRole,
                 IsActive=user.IsActive,
+                IsAdmin=user.IsAdmin,
                 Token = tokenString
             });
         }
