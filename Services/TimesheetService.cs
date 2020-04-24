@@ -13,6 +13,8 @@ namespace WebApi
 
         IEnumerable<Timesheet> GetAll();
 
+        Timesheet Create(Timesheet timesheet);
+
     }//INTERFACE IUserService
     public class TimesheetService: ITimesheetService
     {
@@ -51,6 +53,14 @@ namespace WebApi
         public IEnumerable<Timesheet> GetAll()
         {
             return _context.Timesheets;
+        }
+
+        public Timesheet Create(Timesheet timesheet)
+        {
+            _context.Timesheets.Add(timesheet);
+            _context.SaveChanges();
+
+            return timesheet;
         }
     }
 }

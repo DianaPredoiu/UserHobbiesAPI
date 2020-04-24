@@ -13,6 +13,8 @@ namespace WebApi
 
         IEnumerable<Project> GetManagerProjects(int id);
 
+        IEnumerable<Project> GetAll();
+
     }//INTERFACE IUserService
     public class ProjectService : IProjectService
     {
@@ -66,6 +68,11 @@ namespace WebApi
                               };
 
             return projectList;
+        }
+
+        public IEnumerable<Project> GetAll()
+        {
+            return _context.Projects;
         }
 
     }

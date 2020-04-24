@@ -80,6 +80,10 @@ namespace WebApi
            services.AddScoped<IProjectService, ProjectService>();
            services.AddScoped<IRoleService, RoleService>();
            services.AddScoped<ITeamService, TeamService>();
+           services.AddScoped<IProjectService, ProjectService>();
+           services.AddScoped<ILocationService, LocationService>();
+           services.AddScoped<ITimesheetService, TimesheetService>();
+           services.AddScoped<ITimesheetActivityService, TimesheetActivityService>();
 
         }
 

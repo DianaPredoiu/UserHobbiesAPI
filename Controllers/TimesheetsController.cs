@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.Dtos;
+using WebApi.Entities;
 using WebApi.Helpers;
 
 namespace WebApi
@@ -50,6 +51,27 @@ namespace WebApi
             var users = _timesheetService.GetAll();
             var userDtos = _mapper.Map<IList<TimesheetDto>>(users);
             return Ok(userDtos);
+        }
+
+        [AllowAnonymous]
+        //GETALL USERS
+        [HttpPost("create")]
+        public IActionResult Create([FromBody]TimesheetDto timesheetDto)
+        {
+            // map dto to entity
+            var timesheet = _mapper.Map<Timesheet>(timesheetDto);
+
+            try
+            {
+                // save 
+                _timesheetService.Create(timesheet);
+                return Ok(timesheet);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }
