@@ -35,12 +35,13 @@ namespace WebApi
 
         [AllowAnonymous]
         //GET USER BY ID
-        [HttpGet("{id}/{date}")]//ROUTE
-        public IActionResult GetById(int id ,DateTime date)
+        [HttpGet("{id}")]//ROUTE
+        public IActionResult GetById(int id)
         {
-            var timesheet = _timesheetService.GetTimesheetById(id,date);
-            var timesheetDto = _mapper.Map<IList<TimesheetDto>>(timesheet);
-            return Ok(timesheetDto);
+            var timesheet = _timesheetService.GetTimesheetById(id);
+            
+            var timesheetDto = _mapper.Map<IList<TimesheetViewDto>>(timesheet);
+            return Ok(timesheetDto);   
         }
 
         [AllowAnonymous]

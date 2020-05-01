@@ -36,10 +36,11 @@ namespace WebApi.Controllers
 
         [AllowAnonymous]
         //GETALL USERS
-        [HttpPost]
+        [HttpPost("create")]
         public IActionResult Create([FromBody]TimesheetActivityDto timesheetActivityDto)
         {
             // map dto to entity
+            
             var timesheetActivity = _mapper.Map<TimesheetActivity>(timesheetActivityDto);
 
             try
@@ -54,5 +55,7 @@ namespace WebApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        
     }
 }
