@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Helpers;
 
 namespace WebApi.Dtos
 {
@@ -13,10 +15,10 @@ namespace WebApi.Dtos
         
         public string ProjectName { get; set; }
 
-        
+        [JsonConverter(typeof(JsonDateConverter))]
         public DateTime StartDate { get; set; }
 
-        
+        [JsonConverter(typeof(JsonDateConverter))]
         public DateTime EndDate { get; set; }
 
         

@@ -15,6 +15,10 @@ namespace WebApi.Services
         void Update(User user, string password = null);
         void Delete(int id);
         bool VerifyPassword(string password, int id);
+        IEnumerable<User> GetAllByIdTeam(int id);
+
+        IEnumerable<User> GetAllByIdProject(int id);
+
 
     }//INTERFACE IUserService
 
@@ -180,6 +184,57 @@ namespace WebApi.Services
             }
 
             return true;
+        }
+
+        public IEnumerable<User> GetAllByIdTeam(int IdTeam)
+        {
+            var users = _context.Users;
+            var teams = _context.Teams;
+
+            var teamMembers = from u in users
+                              join t in teams on u.IdTeam equals t.IdTeam
+                              where u.IdTeam==IdTeam
+                              select new User
+                              {
+                                  IdUser = u.IdUser,
+                                  IdRole = u.IdRole,
+                                  IdTeam = u.IdTeam,
+                                  Email = u.Email,
+                                  IsActive = u.IsActive,
+                                  IsAdmin = u.IsAdmin,
+                                  Username = u.Username,
+
+                              };
+
+            return teamMembers;
+        }
+
+        public IEnumerable<User> GetAllByIdProject(int id)
+        {
+            var users = _context.Users;
+            var projects = _context.Projects;
+            var timesheetActivity = _context.TimesheetActivities;
+            var timesheet = _context.Timesheets;
+            var projectManager = _context.ProjectManagers;
+
+            var projectMembers = from u in users
+                              
+                              join t in timesheet on u.IdUser equals t.IdUser
+                              join ta in timesheetActivity on t.IdTimesheet equals ta.IdTimesheet
+                              where ta.IdProject == id
+                              select new User
+                              {
+                                  IdUser = u.IdUser,
+                                  IdRole = u.IdRole,
+                                  IdTeam = u.IdTeam,
+                                  Email = u.Email,
+                                  IsActive = u.IsActive,
+                                  IsAdmin = u.IsAdmin,
+                                  Username = u.Username,
+
+                              };
+
+            return projectMembers;
         }
 
 

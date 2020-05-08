@@ -157,7 +157,27 @@ namespace WebApi.Controllers
             else
                 return BadRequest(new { message = "Password is incorrect" });
         }
-        
+
+        [AllowAnonymous]
+        //GET USER BY ID
+        [HttpGet("getTeamMembers/{id}")]//ROUTE
+        public IActionResult GetTeamMembersByTeamId(int id)
+        {
+            var users = _userService.GetAllByIdTeam(id);
+            var userDto = _mapper.Map<IList<UserDto>>(users);
+            return Ok(userDto);
+        }
+
+        [AllowAnonymous]
+        //GET USER BY ID
+        [HttpGet("getProjectMembers/{id}")]//ROUTE
+        public IActionResult GetProjectMembersByProjectId(int id)
+        {
+            var users = _userService.GetAllByIdProject(id);
+            var userDto = _mapper.Map<IList<UserDto>>(users);
+            return Ok(userDto);
+        }
+
     }//CLASS UsersController
 
 }//NAMESPACE WebApi.Controllers

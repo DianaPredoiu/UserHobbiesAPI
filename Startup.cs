@@ -32,6 +32,7 @@ namespace WebApi
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAutoMapper();
+            
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -84,6 +85,7 @@ namespace WebApi
            services.AddScoped<ILocationService, LocationService>();
            services.AddScoped<ITimesheetService, TimesheetService>();
            services.AddScoped<ITimesheetActivityService, TimesheetActivityService>();
+           services.AddScoped<IProjectManagerService, ProjectManagerService>();
 
         }
 

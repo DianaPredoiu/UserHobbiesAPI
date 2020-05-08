@@ -9,7 +9,9 @@ namespace WebApi
 {
     public interface ITimesheetService
     {
-        IEnumerable<TimesheetView> GetTimesheetById(int id);
+        IEnumerable<TimesheetView> GetTimesheetById(int id,DateTime date);//by user id
+
+        IEnumerable<TimesheetView> GetTimesheetByProjectId(int id, DateTime date, int idProject);
 
         IEnumerable<Timesheet> GetAll();
 
@@ -26,7 +28,7 @@ namespace WebApi
             _context = context;
         }
 
-        public IEnumerable<TimesheetView> GetTimesheetById(int id)
+        public IEnumerable<TimesheetView> GetTimesheetById(int id,DateTime date)
         {
             var timesheets = _context.Timesheets;
             var timesheetActivities = _context.TimesheetActivities;
@@ -37,7 +39,7 @@ namespace WebApi
                             join ts in timesheets on t.IdTimesheet equals ts.IdTimesheet
                             join l in locations on ts.IdLocation equals l.IdLocation
                             join p in projects on t.IdProject equals p.IdProject                          
-                            where ts.IdUser == id
+                            where ts.IdUser == id && ts.Date==date
                             select new TimesheetView
                             {
                                 Location=l.LocationName,
@@ -49,6 +51,34 @@ namespace WebApi
                                 BreakTime = ts.BreakTime,
                                 WorkedHours=t.WorkedHours,
                                 Comments=t.Comments
+                            };
+
+            return timesheet;
+        }
+
+        public IEnumerable<TimesheetView> GetTimesheetByProjectId(int id, DateTime date,int idProject)
+        {
+            var timesheets = _context.Timesheets;
+            var timesheetActivities = _context.TimesheetActivities;
+            var projects = _context.Projects;
+            var locations = _context.Locations;
+
+            var timesheet = from t in timesheetActivities
+                            join ts in timesheets on t.IdTimesheet equals ts.IdTimesheet
+                            join l in locations on ts.IdLocation equals l.IdLocation
+                            join p in projects on t.IdProject equals p.IdProject
+                            where ts.IdUser == id && ts.Date == date && t.IdProject==idProject
+                            select new TimesheetView
+                            {
+                                Location = l.LocationName,
+                                Project = p.ProjectName,
+                                IdUser = ts.IdUser,
+                                Date = ts.Date,
+                                StartTime = ts.StartTime,
+                                EndTime = ts.EndTime,
+                                BreakTime = ts.BreakTime,
+                                WorkedHours = t.WorkedHours,
+                                Comments = t.Comments
                             };
 
             return timesheet;
