@@ -19,6 +19,6 @@ namespace WebApi.Dtos
         public string Comments { get; set; }
 
         
-        public float WorkedHours { get; set; }
+        public TimeSpan WorkedHours { get; set; }
     }
 }

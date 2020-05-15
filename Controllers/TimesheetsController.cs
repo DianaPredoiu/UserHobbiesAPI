@@ -45,6 +45,17 @@ namespace WebApi
         }
 
         [AllowAnonymous]
+        //GET USER BY ID
+        [HttpGet("{id}/{date}/{idProj}")]//ROUTE
+        public IActionResult GetById(int id, DateTime date,int idProj)
+        {
+            var timesheet = _timesheetService.GetTimesheetByProjectId(id, date,idProj);
+
+            var timesheetDto = _mapper.Map<IList<TimesheetViewDto>>(timesheet);
+            return Ok(timesheetDto);
+        }
+
+        [AllowAnonymous]
         //GETALL USERS
         [HttpGet]
         public IActionResult GetAll()
@@ -66,7 +77,7 @@ namespace WebApi
             {
                 // save 
                 _timesheetService.Create(timesheet);
-                return Ok(timesheet);
+                return Ok(timesheet.IdTimesheet);
             }
             catch (AppException ex)
             {

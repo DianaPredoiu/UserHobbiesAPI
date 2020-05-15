@@ -41,5 +41,15 @@ namespace WebApi.Controllers
             var projectDtos = _mapper.Map<IList<ProjectDto>>(projects);
             return Ok(projectDtos);
         }
+
+        [AllowAnonymous]
+        //GETALL PROJECTS
+        [HttpGet("getByUserId/{id}")]
+        public IActionResult GetAll(int id)
+        {
+            var projects = _projectService.GetById(id);
+            var projectDtos = _mapper.Map<IList<ProjectDto>>(projects);
+            return Ok(projectDtos);
+        }
     }
 }

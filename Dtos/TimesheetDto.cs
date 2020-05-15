@@ -25,6 +25,6 @@ namespace WebApi.Dtos
         public DateTime EndTime { get; set; }
 
         
-        public DateTime BreakTime { get; set; }
+        public TimeSpan BreakTime { get; set; }
     }
 }

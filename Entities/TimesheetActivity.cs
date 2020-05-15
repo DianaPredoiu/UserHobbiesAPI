@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Entities
@@ -24,7 +25,7 @@ namespace WebApi.Entities
         public string Comments { get; set; }
 
         [Required]
-        public float WorkedHours { get; set; }
+        public TimeSpan WorkedHours { get; set; }
 
     }//CLASS TiemsheetActivity
 

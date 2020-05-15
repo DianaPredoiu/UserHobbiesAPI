@@ -33,7 +33,7 @@ namespace WebApi.Entities
         public DateTime EndTime { get; set; }
 
         [Required]
-        public DateTime BreakTime { get; set; }
+        public TimeSpan BreakTime { get; set; }
 
     }//CLASS Timesheet
 

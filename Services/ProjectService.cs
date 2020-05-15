@@ -15,6 +15,8 @@ namespace WebApi
 
         IEnumerable<Project> GetAll();
 
+        IEnumerable<Project> GetById(int id);
+
     }//INTERFACE IUserService
     public class ProjectService : IProjectService
     {
@@ -73,6 +75,29 @@ namespace WebApi
         public IEnumerable<Project> GetAll()
         {
             return _context.Projects;
+        }
+
+        public IEnumerable<Project> GetById(int id)
+        {
+            var timesheetActivities = _context.TimesheetActivities;
+            var timesheets = _context.Timesheets;
+            var projects = _context.Projects;
+
+            var proj = from ta in timesheetActivities
+                       join p in projects on ta.IdProject equals p.IdProject
+                       join t in timesheets on ta.IdTimesheet equals t.IdTimesheet
+                       where t.IdUser == id
+                       select new Project
+                       {
+                           IdProject = p.IdProject,
+                           ProjectName = p.ProjectName,
+                           StartDate = p.StartDate,
+                           EndDate = p.EndDate,
+                           IsActive = p.IsActive
+                       };
+
+            return proj;
+
         }
 
     }

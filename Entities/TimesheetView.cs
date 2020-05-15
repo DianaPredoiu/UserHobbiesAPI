@@ -22,14 +22,14 @@ namespace WebApi.Entities
         [JsonConverter(typeof(JsonDateConverter))]
         public DateTime EndTime { get; set; }
 
-        [JsonConverter(typeof(JsonDateConverter))]
-        public DateTime BreakTime { get; set; }
+        //[JsonConverter(typeof(JsonDateConverter))]
+        public TimeSpan BreakTime { get; set; }
 
         public string Location { get; set; }
 
         public string Project { get; set; }
 
-        public float WorkedHours { get; set; }
+        public TimeSpan WorkedHours { get; set; }
 
         public string Comments { get; set; }
 
