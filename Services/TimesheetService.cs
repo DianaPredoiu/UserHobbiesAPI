@@ -76,7 +76,7 @@ namespace WebApi
                                 Date = ts.Date,
                                 StartTime = ts.StartTime,
                                 EndTime = ts.EndTime,
-                                BreakTime = ts.BreakTime,
+                                BreakTime =ts.BreakTime,
                                 WorkedHours = t.WorkedHours,
                                 Comments = t.Comments
                             };

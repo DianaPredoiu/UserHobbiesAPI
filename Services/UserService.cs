@@ -16,7 +16,6 @@ namespace WebApi.Services
         void Delete(int id);
         bool VerifyPassword(string password, int id);
         IEnumerable<User> GetAllByIdTeam(int id);
-
         IEnumerable<User> GetAllByIdProject(int id);
 
 

@@ -40,14 +40,15 @@ namespace WebApi.Controllers
         public IActionResult Create([FromBody]TimesheetActivityDto timesheetActivityDto)
         {
             // map dto to entity
-            
+
             var timesheetActivity = _mapper.Map<TimesheetActivity>(timesheetActivityDto);
+
 
             try
             {
                 // save 
                 _timesheetActivityService.Create(timesheetActivity);
-                return Ok(timesheetActivity);
+                return Ok();
             }
             catch (AppException ex)
             {

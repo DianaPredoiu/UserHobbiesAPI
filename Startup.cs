@@ -86,6 +86,7 @@ namespace WebApi
            services.AddScoped<ITimesheetService, TimesheetService>();
            services.AddScoped<ITimesheetActivityService, TimesheetActivityService>();
            services.AddScoped<IProjectManagerService, ProjectManagerService>();
+           services.AddScoped<IProjectAssignmentsService, ProjectAssignmentsService>();
 
         }
 

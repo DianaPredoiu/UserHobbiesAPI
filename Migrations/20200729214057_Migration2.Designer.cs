@@ -10,8 +10,8 @@ using WebApi.Helpers;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200327224550_Migration6")]
-    partial class Migration6
+    [Migration("20200729214057_Migration2")]
+    partial class Migration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,25 @@ namespace WebApi.Migrations
                     b.HasKey("IdProject");
 
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.ProjectAssignments", b =>
+                {
+                    b.Property<int>("IdProject")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<int>("IdUser");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("IdProject");
+
+                    b.ToTable("ProjectAssignments");
                 });
 
             modelBuilder.Entity("WebApi.Entities.ProjectManager", b =>
@@ -108,7 +127,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BreakTime");
+                    b.Property<TimeSpan>("BreakTime");
 
                     b.Property<DateTime>("Date");
 
@@ -138,7 +157,7 @@ namespace WebApi.Migrations
 
                     b.Property<int>("IdTimesheet");
 
-                    b.Property<float>("WorkedHours");
+                    b.Property<TimeSpan>("WorkedHours");
 
                     b.HasKey("IdTimesheetActivity");
 
@@ -160,6 +179,8 @@ namespace WebApi.Migrations
                     b.Property<int>("IdTeam");
 
                     b.Property<bool>("IsActive");
+
+                    b.Property<bool>("IsAdmin");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired();

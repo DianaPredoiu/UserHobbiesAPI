@@ -10,8 +10,8 @@ using WebApi.Helpers;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200415162803_Migration7")]
-    partial class Migration7
+    [Migration("20200518212516_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,7 +108,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BreakTime");
+                    b.Property<long>("BreakTime");
 
                     b.Property<DateTime>("Date");
 
@@ -138,7 +138,7 @@ namespace WebApi.Migrations
 
                     b.Property<int>("IdTimesheet");
 
-                    b.Property<float>("WorkedHours");
+                    b.Property<long>("WorkedHours");
 
                     b.HasKey("IdTimesheetActivity");
 

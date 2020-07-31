@@ -60,8 +60,10 @@ namespace WebApi
         [HttpGet]
         public IActionResult GetAll()
         {
+            
             var users = _timesheetService.GetAll();
             var userDtos = _mapper.Map<IList<TimesheetDto>>(users);
+       
             return Ok(userDtos);
         }
 

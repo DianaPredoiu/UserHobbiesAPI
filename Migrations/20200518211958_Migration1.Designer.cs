@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Helpers;
 
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200518211958_Migration1")]
+    partial class Migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,25 +55,6 @@ namespace WebApi.Migrations
                     b.HasKey("IdProject");
 
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("WebApi.Entities.ProjectAssignments", b =>
-                {
-                    b.Property<int>("IdProject")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("EndDate");
-
-                    b.Property<int>("IdUser");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.HasKey("IdProject");
-
-                    b.ToTable("ProjectAssignments");
                 });
 
             modelBuilder.Entity("WebApi.Entities.ProjectManager", b =>
@@ -125,7 +108,7 @@ namespace WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<TimeSpan>("BreakTime");
+                    b.Property<long>("BreakTime");
 
                     b.Property<DateTime>("Date");
 
@@ -155,7 +138,7 @@ namespace WebApi.Migrations
 
                     b.Property<int>("IdTimesheet");
 
-                    b.Property<TimeSpan>("WorkedHours");
+                    b.Property<long>("WorkedHours");
 
                     b.HasKey("IdTimesheetActivity");
 

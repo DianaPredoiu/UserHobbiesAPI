@@ -24,6 +24,8 @@ namespace WebApi.Helpers
 
         public DbSet<Location> Locations { get; set; }
 
+        public DbSet<ProjectAssignments> ProjectAssignments { get; set; }
+
 
     }//CLASS DataContext
 
