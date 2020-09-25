@@ -34,5 +34,8 @@ namespace WebApi.Entities
         public string Comments { get; set; }
 
         public int IdUser { get; set; }
+
+        public string Username {get; set;}
+
     }
 }

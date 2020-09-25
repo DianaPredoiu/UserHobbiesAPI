@@ -215,14 +215,15 @@ namespace WebApi.Services
             var timesheetActivity = _context.TimesheetActivities;
             var timesheet = _context.Timesheets;
             var projectManager = _context.ProjectManagers;
+            var projAssign = _context.ProjectAssignments;
 
-            var projectMembers = from u in users
-                              
-                              join t in timesheet on u.IdUser equals t.IdUser
-                              join ta in timesheetActivity on t.IdTimesheet equals ta.IdTimesheet
-                              where ta.IdProject == id
-                              select new User
-                              {
+            var projectMembers = from pm in projectManager
+                                 join p in projects on pm.IdProject equals p.IdProject
+                                 join pa in projAssign on pm.IdProject equals pa.IdProject
+                                 join u in users on pa.IdUser equals u.IdUser
+                                 where pm.IdUser==id
+                                 select new User
+                                 {
                                   IdUser = u.IdUser,
                                   IdRole = u.IdRole,
                                   IdTeam = u.IdTeam,
@@ -231,7 +232,7 @@ namespace WebApi.Services
                                   IsAdmin = u.IsAdmin,
                                   Username = u.Username,
 
-                              };
+                                 };
 
             return projectMembers;
         }

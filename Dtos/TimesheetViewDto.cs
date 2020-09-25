@@ -18,7 +18,6 @@ namespace WebApi.Dtos
         [JsonConverter(typeof(JsonDateConverter))]
         public DateTime EndTime { get; set; }
 
-        //[JsonConverter(typeof(JsonDateConverter))]
         public TimeSpan BreakTime { get; set; }
 
         public string Location { get; set; }
@@ -30,5 +29,7 @@ namespace WebApi.Dtos
         public string Comments { get; set; }
 
         public int IdUser { get; set; }
+
+        public string Username { get; set; }
     }
 }

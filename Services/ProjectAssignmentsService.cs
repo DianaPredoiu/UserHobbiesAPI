@@ -32,6 +32,7 @@ namespace WebApi.Services
 
             var result = from a in assign
                          join p in projects on a.IdProject equals p.IdProject
+                         where a.IdUser==userId
                          select new Project
                          {
                              IdProject = p.IdProject,
